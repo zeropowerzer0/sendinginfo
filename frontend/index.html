@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Fuzzy Logic Loan Approval Visualizer — explore membership functions, evaluate applicants, and analyze sensitivity.">
+    <title>Fuzzy Logic Loan Approval Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- Header -->
+    <header class="hero">
+        <div class="hero-badge">
+            <span class="status-dot"></span>
+            Fuzzy Inference Engine
+        </div>
+        <h1>Loan Approval Visualizer</h1>
+        <p>Explore fuzzy logic membership functions, evaluate loan applicants, and visualize decision boundaries.</p>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav" id="tabNav">
+        <button class="tab-btn active" data-tab="evaluator" id="tab-evaluator">
+            <i data-lucide="clipboard-check"></i>
+            Evaluator
+        </button>
+        <button class="tab-btn" data-tab="membership" id="tab-membership">
+            <i data-lucide="trending-up"></i>
+            Membership Functions
+        </button>
+        <button class="tab-btn" data-tab="dataset" id="tab-dataset">
+            <i data-lucide="table-2"></i>
+            Demo Dataset
+        </button>
+        <button class="tab-btn" data-tab="sensitivity" id="tab-sensitivity">
+            <i data-lucide="sliders-horizontal"></i>
+            Sensitivity
+        </button>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- EVALUATOR PANEL -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <section class="tab-panel active" id="panel-evaluator">
+        <div class="evaluator-grid">
+
+            <!-- Input Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="icon-wrap"><i data-lucide="settings-2"></i></div>
+                        Applicant Parameters
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-label">
+                        <span>Credit Score</span>
+                        <span class="input-value" id="val-credit">650</span>
+                    </div>
+                    <input type="range" id="slider-credit" min="300" max="850" value="650" step="1">
+                </div>
+
+                <div class="input-group currency-group">
+                    <div class="input-label">
+                        <span>Annual Income</span>
+                        <span class="input-value" id="val-income">75</span>
+                    </div>
+                    <input type="range" id="slider-income" min="0" max="200" value="75" step="1">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-label">
+                        <span>Debt-to-Income Ratio (%)</span>
+                        <span class="input-value" id="val-dti">35</span>
+                    </div>
+                    <input type="range" id="slider-dti" min="0" max="100" value="35" step="1">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-label">
+                        <span>Employment (Years)</span>
+                        <span class="input-value" id="val-employment">5</span>
+                    </div>
+                    <input type="range" id="slider-employment" min="0" max="30" value="5" step="1">
+                </div>
+
+                <button class="evaluate-btn" id="btn-evaluate">
+                    <i data-lucide="zap"></i>
+                    Evaluate Application
+                </button>
+            </div>
+
+            <!-- Result Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="icon-wrap"><i data-lucide="bar-chart-3"></i></div>
+                        Evaluation Result
+                    </div>
+                </div>
+
+                <div class="result-zone" id="result-zone">
+                    <div class="placeholder-result" id="placeholder-result">
+                        <div class="ph-icon">
+                            <i data-lucide="target"></i>
+                        </div>
+                        <p>Adjust the parameters and click<br><strong>Evaluate Application</strong> to see results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Membership Breakdown (appears after evaluation) -->
+        <div class="card" style="margin-top: 20px; display: none;" id="membership-detail-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="icon-wrap"><i data-lucide="scan-search"></i></div>
+                    Fuzzy Membership Breakdown
+                </div>
+            </div>
+            <div class="membership-breakdown" id="membership-breakdown"></div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- MEMBERSHIP FUNCTIONS PANEL -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <section class="tab-panel" id="panel-membership">
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="icon-wrap"><i data-lucide="line-chart"></i></div>
+                    Fuzzy Membership Functions
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem;">
+                These charts show how each input and output variable maps to fuzzy linguistic terms.
+                Overlapping regions enable smooth transitions between categories.
+            </p>
+        </div>
+        <div class="mf-charts-grid" id="mf-charts-grid"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- DATASET PANEL -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <section class="tab-panel" id="panel-dataset">
+        <div class="stats-bar" id="stats-bar"></div>
+
+        <div class="distribution-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="icon-wrap"><i data-lucide="bar-chart-2"></i></div>
+                        Score Distribution
+                    </div>
+                </div>
+                <div class="dist-chart-wrapper">
+                    <canvas id="chart-distribution"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="icon-wrap"><i data-lucide="pie-chart"></i></div>
+                        Decision Split
+                    </div>
+                </div>
+                <div class="dist-chart-wrapper">
+                    <canvas id="chart-donut"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="icon-wrap"><i data-lucide="users"></i></div>
+                    Demo Applicants
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="data-table" id="dataset-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Applicant</th>
+                            <th>Credit Score</th>
+                            <th>Income ($K)</th>
+                            <th>DTI %</th>
+                            <th>Employment</th>
+                            <th>Loan Amount</th>
+                            <th>Purpose</th>
+                            <th>Fuzzy Score</th>
+                            <th>Decision</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataset-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!-- SENSITIVITY PANEL -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <section class="tab-panel" id="panel-sensitivity">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="icon-wrap"><i data-lucide="activity"></i></div>
+                    Sensitivity Analysis
+                </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 16px;">
+                See how the approval score changes as you vary one input while keeping the others fixed.
+            </p>
+
+            <div class="sensitivity-controls">
+                <div class="select-group">
+                    <label for="sens-variable">Variable to Vary</label>
+                    <select class="styled-select" id="sens-variable">
+                        <option value="credit_score">Credit Score</option>
+                        <option value="income">Annual Income</option>
+                        <option value="dti">Debt-to-Income Ratio</option>
+                        <option value="employment">Employment Years</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: flex-end;">
+                    <button class="evaluate-btn" id="btn-sensitivity" style="margin-top: 0;">
+                        <i data-lucide="play"></i>
+                        Run Analysis
+                    </button>
+                </div>
+            </div>
+
+            <div class="sensitivity-chart-wrapper">
+                <canvas id="chart-sensitivity"></canvas>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-header">
+                <div class="card-title">
+                    <div class="icon-wrap"><i data-lucide="layers"></i></div>
+                    All Variables — Sensitivity Overlay
+                </div>
+            </div>
+            <div class="sensitivity-chart-wrapper">
+                <canvas id="chart-sensitivity-all"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <footer class="app-footer">
+        Fuzzy Logic Loan Approval Visualizer &middot; Built with scikit-fuzzy &amp; Chart.js
+    </footer>
+</div>
+
+<script src="app.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

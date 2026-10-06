@@ -1,0 +1,782 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Fuzzy Logic Loan Approval Visualizer — Banking UI Theme
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+/* ── CSS Variables ───────────────────────────────────────────────────────── */
+:root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-elevated: #f1f5f9;
+    --border-color: #e2e8f0;
+    --border-hover: #cbd5e1;
+
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+
+    /* Banking Corporate Colors */
+    --brand-primary: #1e3a8a; /* Deep Trust Blue */
+    --brand-light: #eff6ff;
+    
+    /* Functional Colors */
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    
+    --green: #15803d;
+    --green-light: #dcfce7;
+    --green-border: #86efac;
+
+    --amber: #b45309;
+    --amber-light: #fef3c7;
+    --amber-border: #fde047;
+
+    --red: #b91c1c;
+    --red-light: #fee2e2;
+    --red-border: #fca5a5;
+    
+    /* Currency Highlight */
+    --currency-bg: #ecfccb;
+    --currency-text: #3f6212;
+    --currency-border: #bef264;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    --transition: 0.2s ease-in-out;
+}
+
+/* ── Reset & Base ────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Code-like / Financial Data Font */
+.mono, .table-score, .input-value, .stat-number, .mem-bar-value {
+    font-family: 'Fira Code', monospace;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.hero {
+    padding: 48px 0 32px;
+    border-bottom: 2px solid var(--brand-primary);
+    margin-bottom: 32px;
+    background: var(--bg-secondary);
+    margin: 0 -24px 32px;
+    padding: 48px 24px 32px;
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: var(--brand-light);
+    border: 1px solid #bfdbfe;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--brand-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.hero-badge .status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif; /* Classic Bank Typography */
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+}
+
+/* ── Tab Navigation ──────────────────────────────────────────────────────── */
+.tab-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    background: var(--bg-secondary);
+    padding: 8px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--radius-md);
+    flex: 1;
+    justify-content: center;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+}
+
+.tab-btn.active {
+    color: var(--brand-primary);
+    background: var(--brand-light);
+    border-color: #bfdbfe;
+}
+
+.tab-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+}
+
+/* ── Panels ──────────────────────────────────────────────────────────────── */
+.tab-panel {
+    display: none;
+    animation: slideUp 0.3s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bg-elevated);
+}
+
+.card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-title .icon-wrap {
+    color: var(--accent);
+}
+
+/* ── Evaluator Panel ─────────────────────────────────────────────────────── */
+.evaluator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.input-label span:first-child {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.input-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+    background: var(--bg-elevated);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+/* Currency highlight for Income input */
+.input-group.currency-group .input-value {
+    background: var(--currency-bg);
+    color: var(--currency-text);
+    border-color: var(--currency-border);
+}
+
+.input-group.currency-group .input-value::before {
+    content: '$ ';
+    opacity: 0.7;
+}
+.input-group.currency-group .input-value::after {
+    content: ' K';
+    opacity: 0.7;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--border-color);
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 3px solid #ffffff;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 3px solid #ffffff;
+    box-shadow: var(--shadow-md);
+}
+
+.evaluate-btn {
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    background: var(--brand-primary);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.evaluate-btn:hover {
+    background: var(--accent-hover);
+}
+
+.evaluate-btn:active {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ── Result Display ──────────────────────────────────────────────────────── */
+.result-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.score-display {
+    text-align: center;
+    padding: 32px 24px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.score-display.approved { border-color: var(--green-border); background: var(--green-light); }
+.score-display.review { border-color: var(--amber-border); background: var(--amber-light); }
+.score-display.rejected { border-color: var(--red-border); background: var(--red-light); }
+
+.score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+    background: #ffffff;
+    box-shadow: var(--shadow-sm);
+}
+
+.score-circle svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg);
+}
+
+.score-circle .score-num {
+    font-family: 'Fira Code', monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.score-circle .score-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+.decision-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 99px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ffffff;
+    box-shadow: var(--shadow-sm);
+}
+
+.decision-badge.approved { color: var(--green); }
+.decision-badge.review { color: var(--amber); }
+.decision-badge.rejected { color: var(--red); }
+
+/* ── Membership Bars ─────────────────────────────────────────────────────── */
+.membership-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.membership-item {
+    padding: 16px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.membership-item h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px;
+}
+
+.mem-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.mem-bar-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    min-width: 75px;
+    text-transform: capitalize;
+}
+
+.mem-bar-track {
+    flex: 1;
+    height: 8px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.mem-bar-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.mem-bar-value {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 45px;
+    text-align: right;
+}
+
+/* ── Membership Charts Grid ──────────────────────────────────────────────── */
+.mf-charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 24px;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 280px;
+}
+
+.chart-wrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ── Dataset Table (Bank Statement Style) ────────────────────────────────── */
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: #ffffff;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.data-table thead {
+    background: var(--bg-elevated);
+}
+
+.data-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.data-table tbody tr {
+    transition: background var(--transition);
+    cursor: pointer;
+}
+
+.data-table tbody tr:hover {
+    background: var(--brand-light);
+}
+
+.data-table tbody tr.selected {
+    background: var(--brand-light);
+    border-left: 3px solid var(--brand-primary);
+}
+
+/* Specific Table Columns */
+.table-name {
+    font-weight: 600;
+}
+
+.currency-cell {
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    color: var(--currency-text);
+    background: var(--currency-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.table-score {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.table-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.table-badge.approved { background: var(--green-light); color: var(--green); border: 1px solid var(--green-border); }
+.table-badge.review { background: var(--amber-light); color: var(--amber); border: 1px solid var(--amber-border); }
+.table-badge.rejected { background: var(--red-light); color: var(--red); border: 1px solid var(--red-border); }
+
+.purpose-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+}
+
+/* ── Sensitivity Panel ───────────────────────────────────────────────────── */
+.sensitivity-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: var(--bg-elevated);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.select-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.styled-select {
+    padding: 10px 14px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23334155' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    box-shadow: var(--shadow-sm);
+}
+
+.styled-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.sensitivity-chart-wrapper {
+    height: 360px;
+    position: relative;
+    padding-top: 16px;
+}
+
+/* ── Stats Bar ───────────────────────────────────────────────────────────── */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── Distribution Chart ──────────────────────────────────────────────────── */
+.distribution-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+.dist-chart-wrapper {
+    height: 300px;
+    position: relative;
+}
+
+/* ── Placeholder & Loading ───────────────────────────────────────────────── */
+.placeholder-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.placeholder-result .ph-icon {
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.placeholder-result .ph-icon svg {
+    width: 48px;
+    height: 48px;
+    stroke-width: 1.5;
+}
+
+.placeholder-result p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Score Ring ───────────────────────────────────────────────────────────── */
+.score-ring-bg {
+    fill: none;
+    stroke: var(--bg-elevated);
+    stroke-width: 8;
+}
+
+.score-ring-fg {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.app-footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 60px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .evaluator-grid { grid-template-columns: 1fr; }
+    .membership-breakdown { grid-template-columns: 1fr; }
+    .mf-charts-grid { grid-template-columns: 1fr; }
+    .distribution-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .sensitivity-controls { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+    .hero h1 { font-size: 1.75rem; }
+    .tab-nav { flex-wrap: wrap; }
+    .tab-btn { flex: 1 1 40%; padding: 10px; font-size: 0.8rem; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .card { padding: 16px; }
+}

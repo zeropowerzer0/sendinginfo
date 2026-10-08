@@ -53,25 +53,7 @@
     --transition: 0.2s ease-in-out;
 }
 
-/* ── Reset & Base ────────────────────────────────────────────────────────── */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
-    min-height: 100vh;
-}
+/* ── Reset & Base (Removed to use bank.css base) ─────────────────────────── */
 
 /* Code-like / Financial Data Font */
 .mono, .table-score, .input-value, .stat-number, .mem-bar-value {
@@ -86,7 +68,7 @@ body {
 }
 
 /* ── Header ──────────────────────────────────────────────────────────────── */
-.hero {
+.app-hero {
     padding: 48px 0 32px;
     border-bottom: 2px solid var(--brand-primary);
     margin-bottom: 32px;
@@ -96,7 +78,7 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-.hero-badge {
+.app-hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -112,14 +94,14 @@ body {
     margin-bottom: 16px;
 }
 
-.hero-badge .status-dot {
+.app-hero-badge .status-dot {
     width: 6px;
     height: 6px;
     background: var(--accent);
     border-radius: 50%;
 }
 
-.hero h1 {
+.app-hero h1 {
     font-family: 'Playfair Display', serif; /* Classic Bank Typography */
     font-size: 2.25rem;
     font-weight: 700;
@@ -128,7 +110,7 @@ body {
     margin-bottom: 12px;
 }
 
-.hero p {
+.app-hero p {
     font-size: 1rem;
     color: var(--text-secondary);
     max-width: 600px;

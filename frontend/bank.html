@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Capital | Modern Banking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bank.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i data-lucide="shield-check" class="logo-icon"></i>
+                <span>Aurora Capital</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">Personal</a>
+                <a href="#">Business</a>
+                <a href="#">Wealth Management</a>
+                <a href="#">Insights</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#" class="help-link"><i data-lucide="help-circle"></i> Help</a>
+                <button class="btn btn-login"><i data-lucide="lock"></i> Secure Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Your wealth, perfectly balanced.</h1>
+                <p>Experience next-generation banking with intuitive tools, premium rewards, and uncompromised security. Join Aurora Capital today.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Open an Account</button>
+                    <button class="btn btn-secondary">Explore Products</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Floating Dashboard Section -->
+        <section class="dashboard-grid">
+            <!-- Account Balances -->
+            <div class="card balance-card">
+                <div class="card-header">
+                    <h2>Total Balance</h2>
+                    <i data-lucide="more-horizontal"></i>
+                </div>
+                <div class="balance-amount">$142,504.00</div>
+                <p class="balance-growth positive"><i data-lucide="trending-up"></i> +$2,450.00 (1.8%) this month</p>
+                
+                <div class="accounts-list">
+                    <div class="account-item">
+                        <div class="account-info">
+                            <div class="account-icon"><i data-lucide="briefcase"></i></div>
+                            <div>
+                                <h4>Premium Checking</h4>
+                                <span>...4829</span>
+                            </div>
+                        </div>
+                        <div class="account-value">$18,240.50</div>
+                    </div>
+                    <div class="account-item">
+                        <div class="account-info">
+                            <div class="account-icon"><i data-lucide="piggy-bank"></i></div>
+                            <div>
+                                <h4>High-Yield Savings</h4>
+                                <span>...9102</span>
+                            </div>
+                        </div>
+                        <div class="account-value">$124,263.50</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-outline full-width mt-4">View All Accounts</button>
+            </div>
+
+            <!-- Credit Card Product -->
+            <div class="card product-card">
+                <div class="card-header">
+                    <h2>Aurora Premium Reserve</h2>
+                    <span class="badge">New</span>
+                </div>
+                <div class="product-image-container">
+                    <img src="images/credit_card.jpg" alt="Premium Reserve Credit Card" class="product-image">
+                </div>
+                <div class="product-details">
+                    <div class="detail-row">
+                        <span>Current Balance</span>
+                        <span class="strong">$3,420.75</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Available Credit</span>
+                        <span class="strong text-success">$26,579.25</span>
+                    </div>
+                    <div class="rewards-box">
+                        <i data-lucide="award" class="text-gold"></i>
+                        <div>
+                            <h4>145,200 Points</h4>
+                            <p>Available to redeem</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Features -->
+            <div class="card features-card">
+                <div class="card-header">
+                    <h2>Quick Actions</h2>
+                </div>
+                <div class="action-grid">
+                    <div class="action-item">
+                        <div class="action-icon bg-blue-light"><i data-lucide="send"></i></div>
+                        <span>Transfer</span>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon bg-blue-light"><i data-lucide="file-text"></i></div>
+                        <span>Pay Bills</span>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon bg-blue-light"><i data-lucide="smartphone-charging"></i></div>
+                        <span>Deposit</span>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon bg-blue-light"><i data-lucide="pie-chart"></i></div>
+                        <span>Invest</span>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon bg-blue-light"><i data-lucide="credit-card"></i></div>
+                        <span>Cards</span>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon bg-blue-light"><i data-lucide="shield"></i></div>
+                        <span>Security</span>
+                    </div>
+                </div>
+                <div class="recent-transactions">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-item">
+                        <div class="tx-icon tx-expense"><i data-lucide="coffee"></i></div>
+                        <div class="tx-details">
+                            <h4>Artisan Coffee Roasters</h4>
+                            <span>Today, 8:42 AM</span>
+                        </div>
+                        <div class="tx-amount">-$12.50</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="tx-icon tx-income"><i data-lucide="arrow-down-left"></i></div>
+                        <div class="tx-details">
+                            <h4>TechCorp Salary</h4>
+                            <span>Yesterday, 9:00 AM</span>
+                        </div>
+                        <div class="tx-amount positive">+$4,250.00</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information / Marketing Grid -->
+        <section class="info-section">
+            <div class="section-title">
+                <h2>Designed for your financial success</h2>
+                <p>Everything you need to manage, grow, and protect your wealth.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i data-lucide="lock" class="feature-icon"></i>
+                    <h3>Bank-Grade Security</h3>
+                    <p>Advanced encryption and biometric authentication keep your data and money safe at all times.</p>
+                </div>
+                <div class="feature-box">
+                    <i data-lucide="smartphone" class="feature-icon"></i>
+                    <h3>Intuitive Mobile App</h3>
+                    <p>Manage your accounts on the go with our award-winning, beautifully designed mobile experience.</p>
+                </div>
+                <div class="feature-box">
+                    <i data-lucide="bar-chart-2" class="feature-icon"></i>
+                    <h3>Smart Insights</h3>
+                    <p>AI-driven analytics help you understand your spending habits and optimize your savings.</p>
+                </div>
+                <div class="feature-box">
+                    <i data-lucide="headphones" class="feature-icon"></i>
+                    <h3>24/7 Premium Support</h3>
+                    <p>Access our dedicated team of financial advisors and support specialists anytime, anywhere.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i data-lucide="shield-check"></i>
+                    <span>Aurora Capital</span>
+                </div>
+                <p>Secure. Innovative. Yours.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Products</h4>
+                    <a href="#">Checking</a>
+                    <a href="#">Savings</a>
+                    <a href="#">Credit Cards</a>
+                    <a href="#">Loans</a>
+                </div>
+                <div class="link-group">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Investor Relations</a>
+                    <a href="#">Newsroom</a>
+                </div>
+                <div class="link-group">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Security Center</a>
+                    <a href="#">Fraud Prevention</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aurora Capital. Member FDIC. Equal Housing Lender.</p>
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
